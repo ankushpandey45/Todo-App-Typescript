@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 export type todosType = {
   id: string;
@@ -14,6 +20,15 @@ export type todoContext = {
   handleDeleteBtn: (id: string) => void;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
+export const useTodo = () => {
+  const todoConsumer = useContext(TodoCreatecontext);
+  if (!todoConsumer) {
+    throw new Error("useTodo used outside provider");
+  }
+  return todoConsumer;
+};
+
 export const TodoCreatecontext = createContext<todoContext | null>(null);
 
 type childrenType = {
@@ -21,7 +36,14 @@ type childrenType = {
 };
 
 const TodoContext = ({ children }: childrenType) => {
-  const [todos, setTodos] = useState<todosType[]>([]);
+  const [todos, setTodos] = useState<todosType[]>(() => {
+    const savedTodos = localStorage.getItem("Todos");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("Todos", JSON.stringify(todos));
+  }, [todos]);
 
   const handleTodo = (task: string) => {
     setTodos((prev) => {
@@ -57,12 +79,3 @@ const TodoContext = ({ children }: childrenType) => {
 };
 
 export default TodoContext;
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useTodo = () => {
-  const todoConsumer = useContext(TodoCreatecontext);
-  if (!todoConsumer) {
-    throw new Error("useTodo used outside provider");
-  }
-  return todoConsumer!;
-};

@@ -1,12 +1,27 @@
+import { useSearchParams } from "react-router-dom";
 import { useTodo } from "../Store/TodoContext";
 
 const ShowTodoList = () => {
   const { todos, toggleTodoCompleted, handleDeleteBtn } = useTodo();
+  
+  const [searchParams] = useSearchParams();
 
+  const filterData = searchParams.get("todos");
+
+  console.log("filterData>>", filterData);
+
+  let todosData = todos;
+
+  if (filterData === "active") {
+    todosData = todosData.filter((task) => !task.completed);
+  }
+  if (filterData === "completed") {
+    todosData = todosData.filter((task) => task.completed);
+  }
   return (
     <div>
       <ul>
-        {todos.map((todo) => (
+        {todosData.map((todo) => (
           <li key={todo.id}>
             <input
               type="checkbox"

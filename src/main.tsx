@@ -3,11 +3,14 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import TodoContext from "./Store/TodoContext.tsx";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <TodoContext>
-      <App />
-    </TodoContext>
+    <BrowserRouter>
+      <TodoContext>
+        <App />
+      </TodoContext>
+    </BrowserRouter>
   </React.StrictMode>
 );

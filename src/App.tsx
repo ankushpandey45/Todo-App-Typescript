@@ -1,3 +1,4 @@
+import Navbar from "./Components/Navbar";
 import ShowTodoList from "./Components/ShowTodoList";
 import Todo from "./Components/Todo";
 
@@ -5,6 +6,8 @@ function App() {
   return (
     <>
       <h1>TODO REACT + TYPESCRIPT</h1>
+      
+      <Navbar/>
       <Todo />
       <ShowTodoList />
     </>
