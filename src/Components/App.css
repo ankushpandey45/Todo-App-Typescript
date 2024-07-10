@@ -38,6 +38,7 @@ select :hover {
   color: red;
   cursor: pointer;
   padding: 0;
+  margin-left: 100px;
 }
 .Dlt-btn:hover {
   color: darkred;
