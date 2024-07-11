@@ -27,10 +27,11 @@ select :hover {
   width: 70px;
   height: 38px;
   margin: 10px;
-  background-color: rgb(80, 52, 240);
+  background-color: black;
+  font-weight: 600;
   color: white;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 .Dlt-btn {
   background: none;
